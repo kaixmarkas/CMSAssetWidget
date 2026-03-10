@@ -1,0 +1,115 @@
+.wrap{padding:.75rem}
+
+/* Clickable tile / preview */
+.tile{
+  position:relative;
+  border:1px solid #ddd;
+  border-radius:.5rem;
+  overflow:hidden;
+  cursor:pointer;
+}
+
+/* Visible keyboard focus (important for accessibility) */
+.tile:focus,
+.tile:focus-visible{
+  outline:2px solid #1b96ff;
+  outline-offset:2px;
+}
+
+.thumb{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:260px;
+  object-fit:contain;
+  background:#fafafa;
+}
+
+.ov{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  background:rgba(0,0,0,.45);
+  color:#fff;
+  font-weight:600;
+  transition:opacity .15s;
+}
+.tile:hover .ov,
+.tile:focus .ov,
+.tile:focus-visible .ov{
+  opacity:1;
+}
+
+/* Placeholder */
+.ph{
+  border:1px dashed #bbb;
+  border-radius:.5rem;
+  padding:2rem;
+  text-align:center;
+  color:#666;
+  background:#fafafa;
+}
+.phText{margin-top:.5rem}
+
+/* Admin config panel */
+.cfg{
+  margin-top:1rem;
+  display:flex;
+  flex-direction:column;
+  gap:.75rem;
+}
+
+.hint{font-size:.8rem;color:#666}
+
+/* Error message styling */
+.err{
+  color:#b00020;
+  font-size:.85rem;
+  line-height:1.25rem;
+  word-break:break-word;
+}
+
+/* Modal content */
+.body{max-height:70vh;overflow:auto}
+
+/* Keep modal container from being too narrow/wide */
+.slds-modal__container{
+  max-width:70rem;
+  width:90%;
+}
+
+.full{
+  display:block;
+  max-width:100%;
+  height:auto;
+  margin:0 auto;
+}
+
+.frame{
+  width:100%;
+  height:70vh;
+  border:0;
+}
+
+/* Download action */
+.dl{
+  margin-right:1rem;
+  font-weight:600;
+  text-decoration:none;
+}
+.dl:hover,
+.dl:focus{
+  text-decoration:underline;
+}
+
+/* Non-image (document) tile */
+.doc{padding:2rem;text-align:center}
+.docTitle{margin-top:.5rem;font-weight:600}
+.docType{font-size:.8rem;color:#666}
+
+/* Save row */
+.actions{display:flex;align-items:center;gap:.75rem}
+.saved{font-size:.85rem;color:#2e844a;font-weight:600}

@@ -1,0 +1,128 @@
+<template>
+  <lightning-card title={cardTitle}>
+    <div class="wrap">
+
+      <!-- IMAGE TILE -->
+      <template if:true={hasAsset}>
+        <div class="tile"
+             onclick={open}
+             onkeydown={openKey}
+             tabindex="0"
+             role="button">
+
+          <img class="thumb"
+               src={assetUrl}
+               alt={assetTitle} />
+
+          <div class="ov">Click to view</div>
+        </div>
+      </template>
+
+      <!-- PLACEHOLDER -->
+      <template if:false={hasAsset}>
+        <div class="ph">
+          <lightning-icon icon-name="utility:image" size="large"></lightning-icon>
+          <div class="phText">No image selected</div>
+        </div>
+      </template>
+
+      <!-- ADMIN CONFIG -->
+      <template if:true={isAdmin}>
+        <div class="cfg">
+
+          <lightning-combobox
+            label="Workspace"
+            value={wsId}
+            options={wsOpts}
+            onchange={wsChg}>
+          </lightning-combobox>
+
+          <lightning-combobox
+            label="Channel"
+            value={chId}
+            options={chOpts}
+            onchange={chChg}>
+          </lightning-combobox>
+
+          <lightning-input
+            type="search"
+            label="Search images"
+            value={q}
+            onchange={qChg}
+            onkeydown={qKey}
+            placeholder="Type a search term and press Enter"
+            disabled={searchDisabled}>
+          </lightning-input>
+
+          <template if:true={searching}>
+            <div class="hint">Searching…</div>
+          </template>
+
+          <template if:true={srchOpts.length}>
+            <lightning-combobox
+              label="Image options"
+              value={draftId}
+              options={srchOpts}
+              onchange={assetPick}>
+            </lightning-combobox>
+          </template>
+
+          <div class="actions">
+            <lightning-button
+              variant="brand"
+              label={saveLabel}
+              onclick={save}
+              disabled={saveDisabled}>
+            </lightning-button>
+
+            <template if:true={hasSaved}>
+              <span class="saved">Saved</span>
+            </template>
+          </div>
+
+          <template if:true={err}>
+            <div class="err">{err}</div>
+          </template>
+
+        </div>
+      </template>
+
+    </div>
+  </lightning-card>
+
+  <!-- MODAL -->
+  <template if:true={show}>
+    <section class="slds-modal slds-fade-in-open">
+      <div class="slds-modal__container">
+
+        <header class="slds-modal__header">
+          <h2 class="slds-text-heading_medium">{assetTitle}</h2>
+        </header>
+
+        <div class="slds-modal__content body">
+          <img class="full"
+               src={assetUrl}
+               alt={assetTitle}/>
+        </div>
+
+        <footer class="slds-modal__footer">
+          <a class="dl"
+             href={assetUrl}
+             target="_blank"
+             rel="noopener">
+             Download
+          </a>
+
+          <lightning-button
+            label="Close"
+            onclick={close}>
+          </lightning-button>
+        </footer>
+
+      </div>
+    </section>
+
+    <div class="slds-backdrop slds-backdrop_open"
+         onclick={close}></div>
+  </template>
+</template>
